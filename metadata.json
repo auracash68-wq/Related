@@ -1,0 +1,6 @@
+{
+  "name": "NoteNova Pro",
+  "description": "Premium Material-styled notepad application featuring full note organization, rich attachments, custom audio/vibration reminders, app locks, and database backup.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,1109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    tools:ignore="MergeRootFrame"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!-- Screen Content wrapper -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorSurface">
+
+            <!-- Title & search header block -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/btnMenu"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Menu Button"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Logo Title -->
+                <TextView
+                    android:id="@+id/txtHeaderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="NoteNova Pro"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnMenu"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btnPremiumCrown"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="6dp"
+                    android:src="@android:drawable/btn_star_big_on"
+                    android:contentDescription="Premium Badge"
+                    app:layout_constraintBottom_toBottomOf="@id/txtHeaderTitle"
+                    app:layout_constraintStart_toEndOf="@id/txtHeaderTitle"
+                    app:layout_constraintTop_toTopOf="@id/txtHeaderTitle" />
+
+                <ImageButton
+                    android:id="@+id/btnSort"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Sort Notes"
+                    android:src="@android:drawable/ic_menu_manage"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btnSettings"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/btnSettings"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Settings Button"
+                    android:src="@android:drawable/ic_menu_preferences"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Search Bar Layout -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/searchBarContainer"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/search_bar_bg"
+                app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+                <ImageView
+                    android:id="@+id/icSearch"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@android:drawable/ic_menu_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@null"
+                    android:hint="Smart search notepad..."
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icSearch" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Horizontal Category Quick Filters -->
+            <HorizontalScrollView
+                android:id="@+id/scrollCategoryTags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="16dp"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@id/searchBarContainer">
+
+                <LinearLayout
+                    android:id="@+id/layoutCategoriesList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="4dp">
+
+                    <!-- Added programmatically or manually -->
+                    <TextView
+                        android:id="@+id/chipAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/tag_bg_selected"
+                        android:gravity="center"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:text="All"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chipGeneral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/tag_bg_unselected"
+                        android:gravity="center"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:text="General" />
+
+                    <TextView
+                        android:id="@+id/chipWork"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/tag_bg_unselected"
+                        android:gravity="center"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:text="Work" />
+
+                    <TextView
+                        android:id="@+id/chipPersonal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/tag_bg_unselected"
+                        android:gravity="center"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:text="Personal" />
+
+                    <TextView
+                        android:id="@+id/chipChecklists"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/tag_bg_unselected"
+                        android:gravity="center"
+                        android:paddingHorizontal="16dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:text="Checklists" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/txtCurrentFolderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:text="All Active Notes"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scrollCategoryTags" />
+
+            <!-- Empty Notes State View -->
+            <LinearLayout
+                android:id="@+id/layoutEmptyState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtCurrentFolderTitle">
+
+                <ImageView
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:tint="?attr/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="No notes found in this scope"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="Tap the circular floating action button below to create your very first NoteNova note!"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <!-- Notes List RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNotes"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:paddingBottom="88dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtCurrentFolderTitle" />
+
+            <!-- Simulated G-Play Ads Banner Frame (Can be dismissed) -->
+            <LinearLayout
+                android:id="@+id/layoutSimulatedAd"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#FFE082"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingHorizontal="12dp"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="[AD] Unlock cloud features, widgets &amp; remove ads with NoteNova Premium!"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/btnUnlockPremiumAd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Unlock"
+                    android:textSize="10sp"
+                    android:padding="2dp"
+                    android:backgroundTint="?attr/colorPrimary" />
+            </LinearLayout>
+
+            <!-- FLOAT ACTION BUTTON -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabAddNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="68dp"
+                android:contentDescription="Add Note"
+                android:src="@android:drawable/ic_input_add"
+                app:backgroundTint="?attr/colorPrimaryContainer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- ============================================== -->
+            <!-- NOTE EDITOR CONTAINER BLOCK (OVERLAY GONE)     -->
+            <!-- ============================================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutNoteEditorOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorSurface"
+                android:visibility="gone"
+                android:elevation="12dp"
+                tools:visibility="visible">
+
+                <!-- Editor Toolbar -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/editorToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="?attr/colorSurfaceVariant"
+                    android:paddingHorizontal="4dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageButton
+                        android:id="@+id/btnEditorBack"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Back"
+                        android:src="@android:drawable/ic_menu_revert"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/btnUndo"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Undo"
+                            android:src="@android:drawable/ic_media_previous" />
+
+                        <ImageButton
+                            android:id="@+id/btnRedo"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Redo"
+                            android:src="@android:drawable/ic_media_next" />
+
+                        <ImageButton
+                            android:id="@+id/btnEditorPin"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Pin Note"
+                            android:src="@android:drawable/btn_star" />
+
+                        <ImageButton
+                            android:id="@+id/btnEditorDuplicate"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Duplicate Note"
+                            android:src="@android:drawable/ic_menu_crop" />
+
+                        <ImageButton
+                            android:id="@+id/btnEditorDelete"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Move to Bin"
+                            android:src="@android:drawable/ic_menu_delete" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Scrollable Body Input -->
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:padding="16dp"
+                    app:layout_constraintBottom_toTopOf="@id/layoutMetadataFooter"
+                    app:layout_constraintTop_toBottomOf="@id/editorToolbar">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Dropdowns for Category, Security PIN etc -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="?attr/colorSurfaceVariant"
+                            android:layout_marginBottom="12dp"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Folder: "
+                                android:textStyle="bold"
+                                android:textSize="12sp" />
+
+                            <Spinner
+                                android:id="@+id/spinnerCategory"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="Security: "
+                                android:textStyle="bold"
+                                android:textSize="12sp" />
+
+                            <CheckBox
+                                android:id="@+id/cbLockNote"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Lock"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <!-- Title Input -->
+                        <EditText
+                            android:id="@+id/etNoteTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="Title"
+                            android:inputType="textCapSentences"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <!-- Tags Input -->
+                        <EditText
+                            android:id="@+id/etNoteTags"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:background="@null"
+                            android:hint="Add comma-separated tags (e.g., life, ideas, shopping)..."
+                            android:inputType="text"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="13sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginVertical="12dp"
+                            android:background="?attr/colorOutline" />
+
+                        <!-- Text/Checklist Toggle -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="12dp">
+
+                            <Button
+                                android:id="@+id/btnToggleChecklist"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="40dp"
+                                android:text="Toggle Checklist Workspace"
+                                android:textSize="11sp" />
+
+                            <Button
+                                android:id="@+id/btnSetReminder"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="8dp"
+                                android:text="Set Reminder Alarm"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <!-- Active Reminder Tag (Hidden unless set) -->
+                        <LinearLayout
+                            android:id="@+id/layoutActiveReminderTag"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#C8E6C9"
+                            android:padding="8dp"
+                            android:layout_marginBottom="12dp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/txtReminderDetails"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Alarm schedule: Dec 12, 10:00 AM"
+                                android:textColor="#1B5E20"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <ImageButton
+                                android:id="@+id/btnClearReminder"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutAttachmentTag"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="#D1C4E9"
+                            android:padding="8dp"
+                            android:layout_marginBottom="12dp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/txtAttachmentDetails"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Attachment added: sketch_drawing.png"
+                                android:textColor="#311B92"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <ImageButton
+                                android:id="@+id/btnClearAttachment"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+                        </LinearLayout>
+
+                        <!-- Add Attachment Action bar -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginBottom="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Attach file: "
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btnAttachImage"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+ Image"
+                                android:textSize="11sp"/>
+
+                            <Button
+                                android:id="@+id/btnAttachAudio"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+ Audio"
+                                android:textSize="11sp"/>
+
+                            <Button
+                                android:id="@+id/btnAttachPdf"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+ PDF"
+                                android:textSize="11sp"/>
+
+                        </LinearLayout>
+
+                        <!-- Normal Note Content Text editor -->
+                        <EditText
+                            android:id="@+id/etNoteContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@null"
+                            android:gravity="top|start"
+                            android:hint="Write something amazing..."
+                            android:inputType="textMultiLine"
+                            android:minLines="10"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="16sp" />
+
+                        <!-- Checklist Editor Layout (Holds dynamically added items) -->
+                        <LinearLayout
+                            android:id="@+id/layoutChecklistHolder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Interactive Tasks Checklist"
+                                android:textColor="?attr/colorPrimary"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:id="@+id/listChecklistElements"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingVertical="8dp" />
+
+                            <Button
+                                android:id="@+id/btnAddChecklistItem"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+ Add checklist task"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+                <!-- Footer statistics reader bar -->
+                <LinearLayout
+                    android:id="@+id/layoutMetadataFooter"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:background="?attr/colorSurfaceVariant"
+                    android:paddingHorizontal="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtWordsCount"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="0 words"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/txtCharsCount"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="0 characters"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/txtReadingTime"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="1 min read"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- ============================================== -->
+            <!-- SETTINGS & PREMIUM VIEW OVERLAY (GONE)         -->
+            <!-- ============================================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutSettingsOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorSurface"
+                android:visibility="gone"
+                android:elevation="14dp">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/settingsToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="?attr/colorPrimary"
+                    app:title="NoteNova Settings"
+                    app:titleTextColor="?attr/colorOnPrimary"
+                    app:navigationIcon="?attr/homeAsUpIndicator"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:padding="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/settingsToolbar">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Premium simulator panel -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="#FFE0B2">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="⭐ NoteNova Pro Lifetime Status"
+                                    android:textColor="#E65100"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txtPremiumStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Subscription status: Active Premium"
+                                    android:textColor="#3E2723"
+                                    android:layout_marginTop="4dp"
+                                    android:textSize="13sp" />
+
+                                <Button
+                                    android:id="@+id/btnSimulateBilling"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Buy Pro Membership ($4.99)"
+                                    android:backgroundTint="#F57C00"/>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Setting parameters -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="App Appearance Theme"
+                            android:textStyle="bold"
+                            android:layout_marginTop="16dp"
+                            android:textSize="14sp"/>
+
+                        <RadioGroup
+                            android:id="@+id/rgThemeSelect"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rbThemeSystem"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="System"/>
+
+                            <RadioButton
+                                android:id="@+id/rbThemeLight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:text="Light"/>
+
+                            <RadioButton
+                                android:id="@+id/rbThemeDark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:text="Dark"/>
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Security App Lock"
+                            android:textStyle="bold"
+                            android:layout_marginTop="16dp"
+                            android:textSize="14sp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Secure app access with 4-Digit PIN passcode lock"
+                                android:textSize="13sp"/>
+
+                            <Switch
+                                android:id="@+id/switchLockPin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Offline Database Backups"
+                            android:textStyle="bold"
+                            android:layout_marginTop="16dp"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Export fully encrypted database backup local archives, restoring them whenever you change files."
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="8dp">
+
+                            <Button
+                                android:id="@+id/btnTriggerBackup"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Backup SQLite"
+                                android:backgroundTint="?attr/colorPrimaryVariant" />
+
+                            <Button
+                                android:id="@+id/btnTriggerRestore"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Restore SQLite"
+                                android:backgroundTint="?attr/colorSecondary" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- ============================================== -->
+            <!-- APP LOCK SECURITY FULLSCREEN BLOCK (GONE)     -->
+            <!-- ============================================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutAppLockOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorSurface"
+                android:visibility="gone"
+                android:elevation="20dp"
+                tools:visibility="gone">
+
+                <TextView
+                    android:id="@+id/txtLockBanner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NoteNova Secure Box"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/txtPINPlaceholder"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/txtPINPlaceholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="[ Enter 4-Digit Passcode ]"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@id/txtPINDisplay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtLockBanner" />
+
+                <TextView
+                    android:id="@+id/txtPINDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="⬤  ⬤  ⬤  ⬤"
+                    android:letterSpacing="0.4"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="28dp"
+                    app:layout_constraintBottom_toTopOf="@id/layoutNumKeyboard"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtPINPlaceholder" />
+
+                <!-- Simulating security numeric dialpad -->
+                <GridLayout
+                    android:id="@+id/layoutNumKeyboard"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:columnCount="3"
+                    android:rowCount="4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtPINDisplay">
+
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="1" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="2" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="3" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="4" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="5" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="6" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="7" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="8" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="9" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:id="@+id/btnPinClear" android:text="C" android:textSize="18sp" android:textColor="#E53935" android:layout_width="80dp" android:layout_height="80dp"/>
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:text="0" android:textSize="22sp" android:layout_width="80dp" android:layout_height="80dp"/>
+                    <Button style="@style/Widget.Material3.Button.TextButton" android:id="@+id/btnPinOk" android:text="OK" android:textSize="16sp" android:textColor="#43A047" android:layout_width="80dp" android:layout_height="80dp"/>
+
+                </GridLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- Side navigation drawer menu items -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Drawer Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@android:drawable/ic_lock_idle_alarm"
+                    android:tint="?attr/colorPrimary"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="NoteNova Pro"
+                    android:textSize="20sp"
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ultimate offline-first notebook"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/colorOutline" />
+
+            <!-- Drawer Elements list -->
+            <TextView
+                android:id="@+id/navActiveNotes"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="12dp"
+                android:drawableStart="@android:drawable/ic_menu_edit"
+                android:drawablePadding="16dp"
+                android:text="Active Notepad"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/navArchive"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="12dp"
+                android:drawableStart="@android:drawable/ic_menu_save"
+                android:drawablePadding="16dp"
+                android:text="Archived Notes"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/navRecycleBin"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="12dp"
+                android:drawableStart="@android:drawable/ic_menu_delete"
+                android:drawablePadding="16dp"
+                android:text="Recycle Bin"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="8dp"
+                android:background="?attr/colorOutline" />
+
+            <TextView
+                android:id="@+id/navSettings"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="12dp"
+                android:drawableStart="@android:drawable/ic_menu_preferences"
+                android:drawablePadding="16dp"
+                android:text="Settings &amp; Passcode"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/navPremium"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:paddingStart="12dp"
+                android:drawableStart="@android:drawable/btn_star_big_on"
+                android:drawablePadding="16dp"
+                android:text="Pro Version Upgrade"
+                android:textColor="#F57C00"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NoteNova Pro</string>
+    <string name="title_search_hint">Smart search notes and checklists...</string>
+    <string name="btn_save">Auto Saved</string>
+    <string name="lbl_pinned">Pinned</string>
+    <string name="lbl_favorite">Favorite</string>
+    <string name="lbl_category_general">General</string>
+    <string name="lbl_category_work">Work</string>
+    <string name="lbl_category_personal">Personal</string>
+    <string name="lbl_category_all">All</string>
+</resources>
